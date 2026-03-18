@@ -31,50 +31,50 @@ public sealed class CorsOptionsConfiguration : IConfigureOptions<CorsOptions>
                 continue;
             }
 
-            options.AddPolicy(corsPolicy.Name, configurePolicy =>
-            {
-                if (corsPolicy.AllowAnyHeader)
-                {
-                    configurePolicy.AllowAnyHeader();
-                }
-                else
-                {
-                    configurePolicy.WithHeaders(corsPolicy.AllowedHeaders);
-                }
+			options.AddPolicy(corsPolicy.Name, configurePolicy =>
+			{
+			  if (corsPolicy.AllowAnyHeader)
+			  {
+				  configurePolicy.AllowAnyHeader();
+			  }
+			  else
+			  {
+				  configurePolicy.WithHeaders(corsPolicy.AllowedHeaders);
+			  }
 
-                if (corsPolicy.AllowAnyMethod)
-                {
-                    configurePolicy.AllowAnyMethod();
-                }
-                else
-                {
-                    configurePolicy.WithMethods(corsPolicy.AllowedMethods);
-                }
+			  if (corsPolicy.AllowAnyMethod)
+			  {
+				  configurePolicy.AllowAnyMethod();
+			  }
+			  else
+			  {
+				  configurePolicy.WithMethods(corsPolicy.AllowedMethods);
+			  }
 
-                if (corsPolicy.AllowAnyOrigin)
-                {
-                    configurePolicy.AllowAnyOrigin();
-                }
-                else
-                {
-                    configurePolicy.WithOrigins(corsPolicy.AllowedOrigins);
-                }
+			  if (allowAnyOrigin)
+			  {
+				  configurePolicy.AllowAnyOrigin();
+			  }
+			  else
+			  {
+				  configurePolicy.WithOrigins(corsPolicy.AllowedOrigins);
+			  }
 
-                if (corsPolicy.AllowCredentials)
-                {
-                    configurePolicy.AllowCredentials();
-                }
-                else
-                {
-                    configurePolicy.DisallowCredentials();
-                }
+			  if (corsPolicy.AllowCredentials)
+			  {
+				  configurePolicy.AllowCredentials();
+			  }
+			  else
+			  {
+				  configurePolicy.DisallowCredentials();
+			  }
 
-                if (corsPolicy.ExposedHeaders?.Length > 0)
-                {
-                    configurePolicy.WithExposedHeaders(corsPolicy.ExposedHeaders);
-                }
-            });
-
+			  if (corsPolicy.ExposedHeaders?.Length > 0)
+			  {
+				  configurePolicy.WithExposedHeaders(corsPolicy.ExposedHeaders);
+			  }
+			});
+            
             if (corsPolicy.IsDefaultPolicy)
             {
                 options.DefaultPolicyName = corsPolicy.Name;
